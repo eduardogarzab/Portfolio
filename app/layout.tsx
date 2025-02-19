@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import type React from "react";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata = {
 	title: "Eduardo Garza - Portfolio",
@@ -14,7 +14,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en" suppressHydrationWarning className="dark">
+		<html lang="en">
 			<body className={`${inter.className} bg-light dark:bg-dark text-gray-900 dark:text-gray-100 transition-colors duration-300`}>
 				<Providers>
 					<Navbar />
@@ -25,5 +25,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		</html>
 	);
 }
-
-import "./globals.css";

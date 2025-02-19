@@ -5,7 +5,7 @@ import { FaGithub, FaLinkedin, FaDownload, FaArrowDown } from "react-icons/fa";
 
 export default function Hero() {
 	return (
-		<section className="flex flex-col items-center justify-center text-center min-h-[calc(100vh-52px)] px-6 relative">
+		<section id="hero" className="flex flex-col items-center justify-center text-center min-h-[calc(100vh-52px)] px-6 relative scroll-mt-[76px]">
 			<motion.h1
 				className="text-4xl sm:text-6xl font-extrabold text-gray-800 dark:text-white will-change-transform"
 				initial={{ opacity: 0, y: -10 }}
@@ -25,14 +25,16 @@ export default function Hero() {
 					href="https://github.com/yourusername"
 					target="_blank"
 					rel="noopener noreferrer"
-					className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white text-2xl sm:text-3xl transition transform hover:scale-110">
+					className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white text-2xl sm:text-3xl transition transform hover:scale-110"
+					aria-label="GitHub">
 					<FaGithub />
 				</a>
 				<a
 					href="https://linkedin.com/in/yourusername"
 					target="_blank"
 					rel="noopener noreferrer"
-					className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white text-2xl sm:text-3xl transition transform hover:scale-110">
+					className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white text-2xl sm:text-3xl transition transform hover:scale-110"
+					aria-label="LinkedIn">
 					<FaLinkedin />
 				</a>
 			</motion.div>

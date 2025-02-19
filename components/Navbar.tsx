@@ -35,11 +35,12 @@ const Navbar = () => {
 		<nav className="bg-white dark:bg-gray-900 shadow-md fixed top-0 left-0 w-full z-50">
 			<div className="container mx-auto px-4 py-4 flex justify-between items-center">
 				<Link
-					href="/"
+					href="#"
 					className="text-2xl font-bold cursor-pointer"
 					onClick={(e) => {
-						e.preventDefault(); // Evita la navegación completa
-						document.documentElement.scrollIntoView({ behavior: "smooth" });
+						e.preventDefault(); // Evita que el enlace haga una recarga de página
+						window.history.replaceState(null, "", "/"); // Limpia la URL (restablece a la raíz)
+						document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
 					}}>
 					Eduardo<span className="text-blue-500">.</span>
 				</Link>
@@ -59,13 +60,13 @@ const Navbar = () => {
 					<a href="/path-to-your-cv.pdf" download className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition duration-300">
 						Download CV
 					</a>
-					<button onClick={toggleTheme} className="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+					<button onClick={toggleTheme} className="p-2 rounded-full bg-gray-200 dark:bg-gray-700" aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
 						{theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
 					</button>
 				</div>
 				<div className="md:hidden">
-					<button onClick={toggleMenu} className="p-2 transition-transform duration-200 ease-in-out transform hover:scale-110">
-						{isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+					<button onClick={toggleMenu} className="p-2 transition-transform duration-200 ease-in-out transform hover:scale-110" aria-label={isMenuOpen ? "Close menu" : "Open menu"}>
+						<span aria-hidden="true">{isMenuOpen ? <X size={24} /> : <Menu size={24} />}</span>
 					</button>
 				</div>
 			</div>
@@ -79,7 +80,15 @@ const Navbar = () => {
 						variants={menuVariants}
 						transition={{ duration: 0.2 }}>
 						<div className="container mx-auto px-4 flex flex-col space-y-4">
-							<Link href="/" className="hover:text-gray-600 dark:hover:text-gray-300" onClick={toggleMenu}>
+							<Link
+								href="#"
+								className="hover:text-gray-600 dark:hover:text-gray-300"
+								onClick={(e) => {
+									e.preventDefault();
+									window.history.replaceState(null, "", "/");
+									document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
+									toggleMenu();
+								}}>
 								Home
 							</Link>
 							<Link href="#about" className="hover:text-gray-600 dark:hover:text-gray-300" onClick={toggleMenu}>
@@ -97,7 +106,10 @@ const Navbar = () => {
 							<a href="/path-to-your-cv.pdf" download className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition duration-300 text-center">
 								Download CV
 							</a>
-							<button onClick={toggleTheme} className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 w-10 h-10 flex items-center justify-center">
+							<button
+								onClick={toggleTheme}
+								className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 w-10 h-10 flex items-center justify-center"
+								aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
 								{theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
 							</button>
 						</div>

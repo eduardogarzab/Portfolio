@@ -1,5 +1,4 @@
 // components/Skills.tsx
-import { useState } from "react";
 import { FaReact, FaNodeJs, FaPython, FaHtml5, FaCss3Alt, FaJs, FaGitAlt } from "react-icons/fa";
 import { SiTailwindcss, SiMongodb, SiPostgresql } from "react-icons/si";
 
