@@ -28,7 +28,7 @@ const projects = [
 
 export default function Projects() {
 	return (
-		<section id="projects" className="py-12 px-6 scroll-mt-[76px]">
+		<section id="projects" className="py-24 px-6 scroll-mt-[76px]">
 			<h2 className="text-3xl font-bold text-center mb-8">
 				My <span className="text-blue-500">Projects</span>
 			</h2>
@@ -45,7 +45,7 @@ export default function Projects() {
 								<a href={link} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-700 flex items-center">
 									<FaExternalLinkAlt className="mr-2" /> Live Demo
 								</a>
-								<a href={github} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-gray-700 flex items-center">
+								<a href={github} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 flex items-center">
 									<FaGithub className="mr-2" /> GitHub
 								</a>
 							</div>

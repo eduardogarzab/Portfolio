@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function About() {
 	return (
-		<section id="about" className="pt-24 pb-12 px-6 flex flex-col md:flex-row items-center gap-8 scroll-mt-[76px]">
+		<section id="about" className="pt-28 pb-24 px-6 flex flex-col md:flex-row items-center gap-8 scroll-mt-[76px]">
 			<div className="w-full md:w-1/3 flex justify-center">
 				<Image src="" width={200} height={200} className="rounded-full shadow-lg" alt="Profile Picture" />
 			</div>

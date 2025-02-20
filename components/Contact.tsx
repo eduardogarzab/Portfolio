@@ -31,7 +31,7 @@ const Contact = () => {
 	};
 
 	return (
-		<section id="contact" className="py-20 scroll-mt-[76px]">
+		<section id="contact" className="py-24 scroll-mt-[76px]">
 			<h2 className="text-3xl font-bold mb-8 text-center">
 				Contact <span className="text-blue-500">Me</span>
 			</h2>
