@@ -11,7 +11,7 @@ export default function Hero() {
 				initial={{ opacity: 0, y: -10 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.2 }}>
-				Eduardo Garza
+				Hola, soy Eduardo Garza
 			</motion.h1>
 			<motion.p
 				className="mt-4 text-lg sm:text-xl font-medium text-gray-600 dark:text-gray-400 will-change-transform"
