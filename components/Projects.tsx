@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { FaGithub, FaHtml5, FaCss3Alt, FaJs, FaPhp } from "react-icons/fa"; // Importa los iconos adecuados
+import { FaGithub, FaArrowDown } from "react-icons/fa";
+import Section from "./Section";
 
 const projects = [
 	{
@@ -8,66 +9,86 @@ const projects = [
 		image: "/img/project1.png",
 		link: "https://intars.com.mx",
 		github: "",
-		technologies: ["Html", "Css", "JS", "PHP"], // Aquí van las tecnologías
+		technologies: ["HTML", "CSS", "JavaScript", "PHP"],
 	},
 ];
 
+const TechnologyTag = ({ technology }: { technology: string }) => {
+	const colors = {
+		HTML: "bg-orange-500/10 text-orange-600 dark:text-orange-400",
+		CSS: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+		JavaScript: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400",
+		PHP: "bg-purple-500/10 text-purple-600 dark:text-purple-400",
+	};
+
+	return <span className={`px-3 py-1 rounded-full text-sm font-medium ${colors[technology as keyof typeof colors]}`}>{technology}</span>;
+};
+
 export default function Projects() {
 	return (
-		<section id="projects" className="py-24 px-6 scroll-mt-[52px]">
-			<h2 className="text-3xl font-bold text-center mb-8">
-				My <span className="text-blue-500">Projects</span>
-			</h2>
-			<div className="flex flex-wrap justify-center gap-8">
-				{projects.map(({ title, description, image, link, github, technologies }) => (
-					<div key={title} className="group relative border-gray-500 dark:border-gray-400 rounded-xl overflow-hidden shadow-lg transition-transform transform hover:scale-105">
-						{/* Toda la card se vuelve un enlace */}
-						<a href={link} target="_blank" rel="noopener noreferrer" className="w-full h-full block">
-							{/* Imagen con nuevas propiedades de Next.js 13 */}
-							<div className="relative w-full h-48">
-								{image ? (
-									<Image
-										src={image}
-										alt={title}
-										fill
-										style={{ objectFit: "cover", objectPosition: "top" }}
-										className="group-hover:opacity-80 transition duration-300"
-										loading="lazy"
-									/>
-								) : (
-									<div className="w-full h-full bg-gray-300 flex items-center justify-center">
-										<p className="text-white">No Image Available</p>
-									</div>
-								)}
-							</div>
-							<div className="p-4 bg-white dark:bg-gray-800 flex flex-col flex-grow">
-								{/* Título */}
-								<div className="flex justify-between items-start">
-									<h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">{title}</h3>
-								</div>
+		<Section id="projects">
+			<div className="space-y-12">
+				<h2 className="text-4xl font-bold text-center text-gray-800 dark:text-white">
+					My <span className="text-blue-500">Projects</span>
+				</h2>
 
-								{/* Iconos de tecnologías debajo del título */}
-								<div className="flex space-x-2 mt-2">
-									{technologies.includes("Html") && <FaHtml5 className="text-orange-500 text-xl hover:text-orange-700 transition duration-300" />}
-									{technologies.includes("Css") && <FaCss3Alt className="text-blue-500 text-xl hover:text-blue-700 transition duration-300" />}
-									{technologies.includes("JS") && <FaJs className="text-yellow-500 text-xl hover:text-yellow-700 transition duration-300" />}
-									{technologies.includes("PHP") && <FaPhp className="text-blue-500 text-xl hover:text-blue-700 transition duration-300" />}
-								</div>
-
-								{/* Descripción */}
-								<p className="text-gray-600 dark:text-gray-400 mt-2 flex-grow">{description}</p>
-								<div className="mt-4 flex justify-between items-center">
-									{github && (
-										<a href={github} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 flex items-center">
-											<FaGithub className="mr-2" /> GitHub
-										</a>
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{projects.map((project) => (
+						<div key={project.title} className="group relative rounded-xl overflow-hidden shadow-lg transition-all hover:shadow-xl dark:bg-gray-800">
+							<a href={project.link} target="_blank" rel="noopener noreferrer" className="block h-full">
+								{/* Image Container */}
+								<div className="relative h-52 w-full">
+									{project.image ? (
+										<Image
+											src={project.image}
+											alt={project.title}
+											fill
+											className="object-cover object-top transition-opacity group-hover:opacity-90"
+											sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+											loading="lazy"
+										/>
+									) : (
+										<div className="h-full w-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+											<p className="text-gray-500 dark:text-gray-400">No Image Available</p>
+										</div>
 									)}
 								</div>
-							</div>
-						</a>
-					</div>
-				))}
+
+								{/* Content Container */}
+								<div className="p-6 space-y-4">
+									{/* Title and Technologies */}
+									<div className="space-y-3">
+										<h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">{project.title}</h3>
+
+										<div className="flex flex-wrap gap-2">
+											{project.technologies.map((tech) => (
+												<TechnologyTag key={tech} technology={tech} />
+											))}
+										</div>
+									</div>
+
+									{/* Description */}
+									<p className="text-gray-600 dark:text-gray-300 leading-relaxed">{project.description}</p>
+
+									{/* GitHub Link */}
+									{project.github && (
+										<div className="pt-2">
+											<a
+												href={project.github}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="inline-flex items-center gap-2 text-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+												<FaGithub className="text-lg" />
+												<span className="font-medium">View Code</span>
+											</a>
+										</div>
+									)}
+								</div>
+							</a>
+						</div>
+					))}
+				</div>
 			</div>
-		</section>
+		</Section>
 	);
 }

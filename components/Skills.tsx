@@ -1,8 +1,9 @@
 import { FaReact, FaNodeJs, FaPython, FaHtml5, FaCss3Alt, FaJs, FaGitAlt } from "react-icons/fa";
 import { SiTailwindcss, SiMongodb, SiPostgresql } from "react-icons/si";
+import Section from "./Section";
 
 const skills = [
-	{ name: "React", icon: FaReact, color: "#61DBFB", level: 90 },
+	{ name: "React", icon: FaReact, color: "#61DAFB", level: 90 },
 	{ name: "Node.js", icon: FaNodeJs, color: "#68A063", level: 85 },
 	{ name: "Python", icon: FaPython, color: "#3776AB", level: 80 },
 	{ name: "HTML5", icon: FaHtml5, color: "#E34F26", level: 95 },
@@ -16,35 +17,43 @@ const skills = [
 
 export default function Skills() {
 	return (
-		<section id="skills" className="py-24 px-6 scroll-mt-[52px]">
-			<h2 className="text-3xl font-bold text-center mb-8">Skills</h2>
-			<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 place-items-center">
-				{skills.map(({ name, icon: Icon, color, level }) => (
-					<div key={name} className="group relative bg-gray-100 dark:bg-gray-800 rounded-xl shadow-lg transition duration-300 w-full flex flex-col justify-between overflow-hidden">
-						{/* Parte superior con ícono y nombre */}
-						<div className="p-6 flex flex-col items-center">
-							<Icon className="text-6xl transition duration-300 group-hover:scale-110" style={{ color }} />
-							<p className="text-center mt-4 font-semibold text-lg">{name}</p>
-						</div>
+		<Section id="skills" className="scroll-mt-[52px]">
+			<div className="space-y-12">
+				<h2 className="text-4xl font-bold text-center text-gray-800 dark:text-white">
+					Technical <span className="text-blue-500">Skills</span>
+				</h2>
 
-						{/* Barra de progreso, alineada al fondo */}
-						<div className="w-full h-2 bg-gray-300 dark:bg-gray-600 rounded-b-xl mt-2">
-							{/* Barra interna que tiene el color y el ancho según el nivel */}
-							<div
-								className="h-full rounded-b-xl"
-								style={{
-									width: `${level}%`,
-									backgroundColor: color,
-								}}></div>
-						</div>
+				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+					{skills.map(({ name, icon: Icon, color, level }) => (
+						<div key={name} className="group relative bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6">
+							{/* Contenido principal */}
+							<div className="flex flex-col items-center space-y-4">
+								<Icon className="text-5xl transition-transform duration-300 group-hover:scale-110" style={{ color }} />
 
-						{/* Hover para mostrar el nivel */}
-						<div className="absolute inset-0 flex items-center justify-center rounded-xl transition-opacity duration-300 opacity-0 group-hover:opacity-100 bg-black bg-opacity-50">
-							<p className="text-white text-xl font-bold">{level}%</p>
+								<div className="text-center space-y-2">
+									<h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">{name}</h3>
+
+									<div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full">
+										<div
+											className="h-full rounded-full transition-all duration-500"
+											style={{
+												width: `${level}%`,
+												backgroundColor: color,
+											}}
+										/>
+									</div>
+								</div>
+							</div>
+
+							<div className="absolute inset-0 flex items-center justify-center rounded-xl bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+								<span className="text-2xl font-bold text-white" style={{ textShadow: `0 0 10px ${color}` }}>
+									{level}%
+								</span>
+							</div>
 						</div>
-					</div>
-				))}
+					))}
+				</div>
 			</div>
-		</section>
+		</Section>
 	);
 }

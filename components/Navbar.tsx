@@ -21,100 +21,106 @@ const Navbar = () => {
 	if (!mounted) return null;
 
 	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-	const toggleTheme = () => {
-		setTheme(theme === "light" ? "dark" : "light");
-	};
+	const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
 
 	const menuVariants = {
 		closed: { opacity: 0, y: -20 },
 		open: { opacity: 1, y: 0 },
 	};
 
+	const navLinks = [
+		{ href: "#about", label: "About" },
+		{ href: "#projects", label: "Projects" },
+		{ href: "#contact", label: "Contact" },
+	];
+
 	return (
-		<nav className="bg-white dark:bg-gray-900 shadow-md fixed top-0 left-0 w-full z-50">
-			<div className="container mx-auto px-4 py-4 flex justify-between items-center">
-				<div className="flex items-center space-x-6">
-					<Link
-						href="#"
-						className="text-2xl font-bold cursor-pointer"
-						onClick={(e) => {
-							e.preventDefault();
-							window.history.replaceState(null, "", "/");
-							document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
-						}}>
-						Eduardo<span className="text-blue-500">.</span>
-					</Link>
-					<div className="hidden md:flex space-x-6 items-center">
-						<Link href="#about" className="hover:text-gray-600 dark:hover:text-gray-300">
-							About
+		<nav className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 fixed top-0 w-full z-50 shadow-sm">
+			<div className="container mx-auto px-4 md:px-6 py-3">
+				<div className="flex justify-between items-center">
+					{/* Logo y enlaces */}
+					<div className="flex items-center space-x-8">
+						<Link
+							href="#"
+							className="text-2xl font-bold hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+							onClick={(e) => {
+								e.preventDefault();
+								window.scrollTo({ top: 0, behavior: "smooth" });
+							}}>
+							Eduardo<span className="text-blue-500">.</span>
 						</Link>
-						<Link href="#projects" className="hover:text-gray-600 dark:hover:text-gray-300">
-							Projects
-						</Link>
-						<Link href="#contact" className="hover:text-gray-600 dark:hover:text-gray-300">
-							Contact
-						</Link>
+
+						{/* Desktop Navigation */}
+						<div className="hidden md:flex items-center space-x-8">
+							{navLinks.map((link) => (
+								<Link key={link.href} href={link.href} className="text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium">
+									{link.label}
+								</Link>
+							))}
+						</div>
 					</div>
-				</div>
 
-				<div className="hidden md:flex space-x-4 items-center ml-auto">
-					<button
-						onClick={toggleTheme}
-						className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700"
-						aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
-						{theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-					</button>
-					<button className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-sm font-medium">ES</button>
-					<a href="/ITC_6to_Eduardo Garza.pdf" download className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition duration-300">
-						Resume
-					</a>
-				</div>
+					{/* Desktop Actions */}
+					<div className="hidden md:flex items-center space-x-4">
+						<button
+							onClick={toggleTheme}
+							className="p-2.5 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors hover:scale-[1.02]"
+							aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
+							{theme === "light" ? <Moon size={20} className="text-gray-700 dark:text-gray-300" /> : <Sun size={20} className="text-gray-700 dark:text-gray-300" />}
+						</button>
+						<a href="/ITC_6to_Eduardo Garza.pdf" download className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2.5 rounded-lg transition-all font-medium hover:scale-[1.02]">
+							Resume
+						</a>
+					</div>
 
-				<div className="md:hidden">
-					<button onClick={toggleMenu} className="p-2 transition-transform duration-200 ease-in-out transform hover:scale-110">
+					{/* Mobile Menu Button */}
+					<button onClick={toggleMenu} className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
 						{isMenuOpen ? <X size={24} /> : <Menu size={24} />}
 					</button>
 				</div>
-			</div>
 
-			<AnimatePresence>
-				{isMenuOpen && (
-					<motion.div
-						className="md:hidden bg-white dark:bg-gray-900 py-4 overflow-hidden will-change-transform"
-						initial="closed"
-						animate="open"
-						exit="closed"
-						variants={menuVariants}
-						transition={{ duration: 0.2 }}>
-						<div className="container mx-auto px-4 flex flex-col space-y-4">
-							<Link href="#about" className="hover:text-gray-600 dark:hover:text-gray-300" onClick={toggleMenu}>
-								About
-							</Link>
-							<Link href="#projects" className="hover:text-gray-600 dark:hover:text-gray-300" onClick={toggleMenu}>
-								Projects
-							</Link>
-							<Link href="#contact" className="hover:text-gray-600 dark:hover:text-gray-300" onClick={toggleMenu}>
-								Contact
-							</Link>
-							<div className="flex justify-between space-x-4">
-								<a href="/ITC_6to_Eduardo Garza.pdf" download className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition duration-300 text-center flex-1">
-									Resume
-								</a>
-								<div className="flex space-x-4 items-center">
+				{/* Mobile Menu */}
+				<AnimatePresence>
+					{isMenuOpen && (
+						<motion.div
+							className="md:hidden mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"
+							initial="closed"
+							animate="open"
+							exit="closed"
+							variants={menuVariants}
+							transition={{ duration: 0.2 }}>
+							<div className="flex flex-col space-y-4">
+								{navLinks.map((link) => (
+									<Link
+										key={link.href}
+										href={link.href}
+										className="text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
+										onClick={toggleMenu}>
+										{link.label}
+									</Link>
+								))}
+								<div className="flex items-center justify-between pt-4 space-x-4">
 									<button
 										onClick={toggleTheme}
-										className="p-2 w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700"
-										aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
-										{theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+										className="p-2.5 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors hover:scale-[1.02] flex-1">
+										{theme === "light" ? (
+											<Moon size={20} className="text-gray-700 dark:text-gray-300 mx-auto" />
+										) : (
+											<Sun size={20} className="text-gray-700 dark:text-gray-300 mx-auto" />
+										)}
 									</button>
-									<button className="p-2 w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-sm font-medium">ES</button>
+									<a
+										href="/ITC_6to_Eduardo Garza.pdf"
+										download
+										className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2.5 rounded-lg transition-all font-medium hover:scale-[1.02] flex-1 text-center">
+										Resume
+									</a>
 								</div>
 							</div>
-						</div>
-					</motion.div>
-				)}
-			</AnimatePresence>
+						</motion.div>
+					)}
+				</AnimatePresence>
+			</div>
 		</nav>
 	);
 };

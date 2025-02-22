@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
+import Section from "./Section";
 
 const Contact = () => {
 	const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const Contact = () => {
 		e.preventDefault();
 		setIsSubmitting(true);
 
-		// Simulate form submission (you should replace this with an actual API request)
+		// Simulate API call
 		await new Promise((resolve) => setTimeout(resolve, 1500));
 
 		setIsSubmitting(false);
@@ -32,119 +33,151 @@ const Contact = () => {
 	};
 
 	return (
-		<section id="contact" className="py-24 duration-300 overflow-hidden relative">
-			<div className="container mx-auto px-6">
+		<Section id="contact" className="scroll-mt-[52px]">
+			<div className="space-y-12">
 				<motion.h2
-					className="text-3xl font-bold mb-12 text-center text-gray-800 dark:text-white"
+					className="text-4xl font-bold text-center text-gray-800 dark:text-white"
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5 }}
 					viewport={{ once: true }}>
-					Contact <span className="text-blue-500">Me</span>
+					Get in <span className="text-blue-500">Touch</span>
 				</motion.h2>
 
-				{/* Contact Info and Form */}
-				<div className="flex flex-col lg:flex-row gap-12">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 					{/* Contact Information */}
-					<motion.div className="lg:w-1/3" initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-						<div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg space-y-6">
+					<motion.div className="space-y-6" initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+						<div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all">
 							<h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6">Contact Information</h3>
 							<div className="space-y-4">
-								<a
-									href="mailto:musmanzafar53@gmail.com"
-									className="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">
-									<Mail className="w-6 h-6 mr-3 text-blue-500" />
-									eduardo.garzab@udem.edu
-								</a>
-								<a href="tel:+923055356766" className="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">
-									<Phone className="w-6 h-6 mr-3 text-blue-500" />
-									+52-811-6880791
-								</a>
-								<div className="flex items-center text-gray-600 dark:text-gray-300">
-									<MapPin className="w-6 h-6 mr-3 text-blue-500" />
-									Monterrey, Mexico
-								</div>
+								{[
+									{
+										icon: Mail,
+										content: "eduardo.garzab@udem.edu",
+										href: "mailto:eduardo.garzab@udem.edu",
+									},
+									{
+										icon: Phone,
+										content: "+52-811-6880791",
+										href: "tel:+528116880791",
+									},
+									{
+										icon: MapPin,
+										content: "Monterrey, Mexico",
+									},
+								].map((item, index) => (
+									<motion.div
+										key={index}
+										className="flex items-center text-gray-600 dark:text-gray-300"
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										transition={{ delay: index * 0.1 }}>
+										<item.icon className="w-6 h-6 mr-3 text-blue-500 flex-shrink-0" />
+										{item.href ? (
+											<a href={item.href} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+												{item.content}
+											</a>
+										) : (
+											<span>{item.content}</span>
+										)}
+									</motion.div>
+								))}
 							</div>
 						</div>
 					</motion.div>
 
 					{/* Contact Form */}
-					<motion.div className="lg:w-2/3" initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-						<form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg space-y-6">
-							{/* Name and Email */}
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-								<div>
-									<label htmlFor="name" className="block mb-2 font-medium text-gray-700 dark:text-gray-300">
-										Name
+					<motion.div className="space-y-6" initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+						<form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all">
+							<div className="space-y-6">
+								<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+									<div className="space-y-2">
+										<label htmlFor="name" className="block font-medium text-gray-700 dark:text-gray-300">
+											Name
+										</label>
+										<input
+											type="text"
+											id="name"
+											name="name"
+											value={formData.name}
+											onChange={handleChange}
+											required
+											className="w-full px-4 py-2 border-2 border-gray-200 dark:border-gray-700 rounded-lg bg-transparent focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+										/>
+									</div>
+									<div className="space-y-2">
+										<label htmlFor="email" className="block font-medium text-gray-700 dark:text-gray-300">
+											Email
+										</label>
+										<input
+											type="email"
+											id="email"
+											name="email"
+											value={formData.email}
+											onChange={handleChange}
+											required
+											className="w-full px-4 py-2 border-2 border-gray-200 dark:border-gray-700 rounded-lg bg-transparent focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+										/>
+									</div>
+								</div>
+
+								<div className="space-y-2">
+									<label htmlFor="subject" className="block font-medium text-gray-700 dark:text-gray-300">
+										Subject
 									</label>
 									<input
 										type="text"
-										id="name"
-										name="name"
-										value={formData.name}
+										id="subject"
+										name="subject"
+										value={formData.subject}
 										onChange={handleChange}
 										required
-										className="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 text-gray-900 dark:text-white"
+										className="w-full px-4 py-2 border-2 border-gray-200 dark:border-gray-700 rounded-lg bg-transparent focus:ring-2 focus:ring-blue-500 outline-none transition-all"
 									/>
 								</div>
-								<div>
-									<label htmlFor="email" className="block mb-2 font-medium text-gray-700 dark:text-gray-300">
-										Email
+
+								<div className="space-y-2">
+									<label htmlFor="message" className="block font-medium text-gray-700 dark:text-gray-300">
+										Message
 									</label>
-									<input
-										type="email"
-										id="email"
-										name="email"
-										value={formData.email}
+									<textarea
+										id="message"
+										name="message"
+										value={formData.message}
 										onChange={handleChange}
 										required
-										className="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 text-gray-900 dark:text-white"
+										rows={4}
+										className="w-full px-4 py-2 border-2 border-gray-200 dark:border-gray-700 rounded-lg bg-transparent focus:ring-2 focus:ring-blue-500 outline-none transition-all"
 									/>
 								</div>
-							</div>
 
-							{/* Subject field */}
-							<div>
-								<label htmlFor="subject" className="block mb-2 font-medium text-gray-700 dark:text-gray-300">
-									Subject
-								</label>
-								<input
-									type="text"
-									id="subject"
-									name="subject"
-									value={formData.subject}
-									onChange={handleChange}
-									required
-									className="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 text-gray-900 dark:text-white"
-								/>
+								<button
+									type="submit"
+									disabled={isSubmitting}
+									className="w-full inline-flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg transition-all hover:scale-[1.02] disabled:opacity-50 disabled:hover:scale-100">
+									{isSubmitting ? (
+										<>
+											<svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+												<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+												<path
+													className="opacity-75"
+													fill="currentColor"
+													d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+											</svg>
+											Sending...
+										</>
+									) : (
+										"Send Message"
+									)}
+								</button>
 							</div>
-
-							{/* Message field */}
-							<div>
-								<label htmlFor="message" className="block mb-2 font-medium text-gray-700 dark:text-gray-300">
-									Message
-								</label>
-								<textarea
-									id="message"
-									name="message"
-									value={formData.message}
-									onChange={handleChange}
-									required
-									rows={4}
-									className="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 text-gray-900 dark:text-white"></textarea>
-							</div>
-							<button
-								type="submit"
-								disabled={isSubmitting}
-								className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
-								{isSubmitting ? "Sending..." : "Send Message"}
-							</button>
 						</form>
-						{submitMessage && <div className="mt-6 p-4 bg-green-100 dark:bg-green-800 text-green-700 dark:text-green-300 rounded-md">{submitMessage}</div>}
+
+						{submitMessage && <div className="p-4 bg-green-500/10 text-green-600 dark:text-green-400 rounded-full text-center">{submitMessage}</div>}
 					</motion.div>
 				</div>
 			</div>
-		</section>
+		</Section>
 	);
 };
 

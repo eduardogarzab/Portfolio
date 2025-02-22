@@ -1,29 +1,38 @@
 import Image from "next/image";
+import Section from "./Section";
 
 export default function About() {
 	return (
-		<section id="about" className="pt-28 pb-24 px-6 flex flex-col md:flex-row items-center gap-8 scroll-mt-[52px]">
-			<div className="w-full md:w-1/3 flex justify-center overflow-hidden">
-				{/* Contenedor con overflow-hidden para asegurar la forma circular */}
-				<div className="w-48 h-48 rounded-full overflow-hidden relative">
-					<Image src="/img/eduardo.jpeg" width={200} height={200} alt="Profile Picture" className="object-cover object-bottom absolute top-0 left-0 w-full h-full" />
+		<Section id="about">
+			<div className="flex flex-col md:flex-row items-center gap-8 mx-auto">
+				<div className="w-full md:w-1/3 flex justify-center">
+					<div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-blue-500/20">
+						<Image src="/img/eduardo.jpeg" width={200} height={200} alt="Profile Picture" className="object-cover object-bottom w-full h-full" priority />
+					</div>
+				</div>
+
+				<div className="w-full md:w-2/3 space-y-6">
+					<h2 className="text-4xl font-bold text-gray-800 dark:text-white">
+						About <span className="text-blue-500">Me</span>
+					</h2>
+
+					<p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+						I'm a <span className="font-semibold text-blue-500">full-stack developer</span> with expertise in building modern web applications. My core stack includes{" "}
+						<span className="font-semibold text-green-500">React/Next.js</span>, <span className="font-semibold text-purple-500">Node.js</span>, and{" "}
+						<span className="font-semibold text-cyan-500">TailwindCSS</span>. I specialize in creating performant, accessible, and SEO-friendly solutions with clean code architecture.
+						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident quisquam deserunt consectetur vero suscipit repellendus sit amet possimus veritatis. Dolor saepe nobis in
+						porro possimus corrupti sed dignissimos illo totam!
+					</p>
+
+					<div className="flex flex-wrap gap-3 justify-center md:justify-start">
+						{["Frontend Architecture", "Backend Development", "UI/UX Design"].map((tag) => (
+							<div key={tag} className="px-4 py-2 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-sm font-medium transition hover:bg-blue-500/20">
+								{tag}
+							</div>
+						))}
+					</div>
 				</div>
 			</div>
-			<div className="w-full md:w-2/3 text-center md:text-left">
-				<h2 className="text-3xl font-bold mb-4">
-					About <span className="text-blue-500">Me</span>
-				</h2>
-				<p className="text-lg text-gray-700 dark:text-gray-300">
-					I'm a <span className="font-semibold text-blue-500">passionate developer</span> focused on creating modern and efficient web applications. My expertise spans across{" "}
-					<span className="font-semibold text-green-500">React, Node.js, and TailwindCSS</span>, always aiming to deliver <span className="underline">clean</span> and{" "}
-					<span className="underline">optimized</span> code.
-				</p>
-				<div className="mt-6 flex flex-wrap gap-4 justify-center md:justify-start">
-					<div className="border border-gray-500 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 dark:border-gray-400">Frontend</div>
-					<div className="border border-gray-500 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 dark:border-gray-400">Backend</div>
-					<div className="border border-gray-500 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 dark:border-gray-400">UI/UX</div>
-				</div>
-			</div>
-		</section>
+		</Section>
 	);
 }

@@ -4,7 +4,7 @@ import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import dynamic from "next/dynamic";
 
-const Hero = dynamic(() => import("@/components/Home"));
+const Hero = dynamic(() => import("@/components/Hero"));
 
 export default function Page() {
 	return (
