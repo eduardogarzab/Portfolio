@@ -6,13 +6,12 @@ import Section from "./Section";
 
 export default function Hero() {
 	return (
-		<Section id="hero" className="flex flex-col items-center justify-center text-center min-h-screen relative overflow-hidden">
-			{/* Fondo animado mejorado */}
+		<Section id="hero" noPadding className="flex flex-col h-screen items-center justify-center text-center relative overflow-hidden">
+			{/* Background */}
 			<div className="absolute inset-0 -z-10">
 				<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-400/30 via-blue-500/20 to-transparent dark:from-blue-900/30 dark:via-blue-800/20 animate-pulse-glow" />
 				<div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/30 to-white/40 dark:via-gray-900/80 dark:to-gray-900" />
 			</div>
-
 			<div className="flex flex-col items-center relative">
 				<motion.h1
 					className="text-5xl sm:text-6xl font-extrabold text-gray-800 dark:text-white drop-shadow-lg"
@@ -59,7 +58,6 @@ export default function Hero() {
 					Contact Me
 				</motion.a>
 			</div>
-
 			<motion.div className="w-full absolute bottom-8 left-0 flex justify-center" animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
 				<button
 					onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}

@@ -38,7 +38,7 @@ const Navbar = () => {
 		<nav className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 fixed top-0 w-full z-50 shadow-sm">
 			<div className="container mx-auto px-4 md:px-6 py-3">
 				<div className="flex justify-between items-center">
-					{/* Logo y enlaces */}
+					{/* Logo and links */}
 					<div className="flex items-center space-x-8">
 						<Link
 							href="#"

@@ -52,18 +52,13 @@ const Contact = () => {
 	return (
 		<Section id="contact" className="scroll-mt-[52px]">
 			<div className="space-y-12">
-				<motion.h2
-					className="text-4xl font-bold text-center text-gray-800 dark:text-white"
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.5 }}
-					viewport={{ once: true }}>
+				<h2 className="text-4xl font-bold text-center text-gray-800 dark:text-white">
 					Get in <span className="text-blue-500">Touch</span>
-				</motion.h2>
+				</h2>
 
 				<div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8">
 					{/* Contact Information */}
-					<motion.div className="space-y-6" initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+					<motion.div className="space-y-6" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
 						<div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all">
 							<h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6">Contact Information</h3>
 							<div className="space-y-4">
@@ -104,7 +99,7 @@ const Contact = () => {
 					</motion.div>
 
 					{/* Contact Form */}
-					<motion.div className="space-y-6" initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+					<motion.div className="space-y-6" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
 						<form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all">
 							<div className="space-y-6">
 								<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
