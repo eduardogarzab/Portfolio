@@ -11,6 +11,14 @@ const projects = [
 		github: "",
 		technologies: ["HTML", "CSS", "JavaScript", "PHP"],
 	},
+	{
+		title: "Tutoring Website",
+		description: "A personal tutoring website to automate scheduling for my freelance sessions, integrating Google Calendar for seamless booking management.",
+		image: "/img/project2.png",
+		link: "https://edu-asesorias.web.app",
+		github: "https://github.com/eduardogarzab/academic-tutoring-website",
+		technologies: ["HTML", "CSS", "JavaScript"],
+	},
 ];
 
 const TechnologyTag = ({ technology }: { technology: string }) => {
